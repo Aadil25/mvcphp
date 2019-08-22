@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<?php echo $this->getHeadHtml(); ?>
+<body>
+<div class="vehicle-information" id="section">
+    <div id="header_panel" class="veh-sidebar">
+        <?php echo $this->getHeaderHtml();?>
+    </div>
+    <div class="veh-content">
+        <?php echo $this->getNavbarHtml(); ?>
+        <div class="veh-cont-main">
+           <!--  <div class="container-fluid" id="anchor-content"> -->
+                <?php echo $this->getContentHtml(); ?>
+            <!-- </div> -->
+        </div>
+        <?php echo $this->getFooterHtml();  ?>
+    </div>
+</div>
+</body>
+</html>

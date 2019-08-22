@@ -1,0 +1,5 @@
+<?php if($this->getBlockCount()):?>
+    <?php foreach($this->getBlocks() as $block): ?>
+        <?php echo $block->toHtml(); ?>
+    <?php endforeach; ?>
+<?php endif; ?>

@@ -1,0 +1,30 @@
+<form id="grid-search-form" action="index.php?controller=product_index&action=create" method="post">  
+<div align="right">
+    <table  border="0" >
+        <tbody>
+            <tr>
+                <td style="width: 50%;">
+                    <h3> 
+                        <br>
+                         Manage Products
+                    </h3> 
+                </td>
+                <td>
+                    <input type="submit" value="Create Product" name="createProduct">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</form>
+<script>
+var object = new Ccc.Product();
+object.resetCheckedElements();
+object.setForm('grid-search-form');
+object.setUseType('url');
+object.setURL('index.php?controller=product_index&action=index');
+if(object.getForm())
+{
+    object.loadPage();
+}
+</script>                    

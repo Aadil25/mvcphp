@@ -1,0 +1,30 @@
+<form id="grid-search-form" action="index.php?controller=category_index&action=create" method="post">  
+<div align="right">
+    <table  border="0" >
+        <tbody>
+            <tr>
+                <td style="width: 50%;">
+                    <h3> 
+                        <br>
+                         Manage Categories
+                    </h3> 
+                </td>
+                <td>
+                    <input type="submit" value="Create Category" name="createcategory">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</form>
+<script>
+var object = new Ccc.Category();
+object.resetCheckedElements();
+object.setForm('grid-search-form');
+object.setUseType('url');
+object.setURL('index.php?controller=category_index&action=index');
+if(object.getForm())
+{
+    object.loadPage();
+}
+</script>                    

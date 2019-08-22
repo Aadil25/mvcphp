@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<?php echo $this->getHeadHtml(); ?>
+<body>
+<div class="wrapper">
+   <div class="main one-column">
+    <div id="header_panel" style="width: 100%; height: 150px; border: 1px solid #FFFFFF;">
+        <?php echo $this->getHeaderHtml();?>
+    </div>
+        <div class="container" id="container">
+            <div class="middle" id="anchor-content">
+                <div id="main-container">
+                    <div style="width: 100%; height: 500px;">
+                    <?php echo $this->getContentHtml(); ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php echo $this->getFooterHtml(); ?>
+    </div>
+</div>
+</body>
+</html>

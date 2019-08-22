@@ -1,0 +1,111 @@
+<form name = "insert" action = "index.php?controller=customer_index&action=saveinsession" method = "post" id="customer-form">
+<?php $customer = Ccc::getModel("customer");
+   //$vehical = Ccc::getModel("vehical");
+   $brands = $this->getBrandNames();
+?>
+<?php $request = Ccc::getModel('request') ?>
+<?php if($request->getParam('editId')): ?>
+    <?php $customer->load($request->getParam('editId')) ?>
+<?php endif; ?>
+    <div class="vehicle-details">
+        <h3>Personal Details</h3>
+        <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                
+                    <div class="form-group">
+                        <label >Customer Name</label>
+                        <input type="text" class="form-control" name="customer[customer_name]">
+                    </div>
+                
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                
+                    <div class="form-group">
+                        <label >Mobile Number</label>
+                        <input type="text" class="form-control" name="customer[mobile_number]">
+                    </div>
+                
+            </div>
+        </div>
+    </div>
+    <div class="vehicle-details">
+        <h3>Personal Details</h3>
+        <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group">
+                     <label >Vehicle Number</label>
+                    <input type="text" class="form-control" name="customer[vehical_number]">
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group brand">
+                    <label>Select Brand</label>
+                    <input value="" type="text" class="form-control" name="vehical[brand_name]" placeholder="Search here" id="brand_name">
+                    <button><i class="fa fa-search" aria-hidden="true"></i></button>
+                    <div id="brandResult"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group car-model">
+                    <label>Model</label>
+                    <input id="model_name" type="text" class="form-control" placeholder="Search here" name="vehical[model_name]">
+                    <button><i class="fa fa-search" aria-hidden="true"></i></button>
+                    <div id="modelResult"></div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group">
+                    <label >Additional Info</label>
+                    <input type="text" class="form-control" name="vehical[additional_info]">
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</form>
+<script type="text/javascript">
+  
+    var availableBrands = <?php echo $brands['brand_array'];?>;
+    var availableModels = <?php echo $brands['model_array'];?>;
+
+    jQuery(document).ready(function(){
+        jQuery('#brand_name').autocomplete({
+          source: availableBrands
+        });
+
+        jQuery('#model_name').autocomplete({
+          source: availableModels
+        });
+        /*jQuery('#brand_name').keyup(function(e){
+            var value = jQuery(this).val();
+            $.ajax({
+                type: 'POST',
+                url: 'index.php?controller=customer_index&action=searchbrand',
+                data: JSON.stringify({brand_name:value}),
+                dataType: "json",
+                cache:false,
+                contentType: 'application/json; charset=utf-8',
+                success: function(response){
+                    console.log(response);
+                    alert("adsad");
+                    if(response.error){
+                        jQuery('#brandResult').hide();
+                    }
+                    else{
+                        jQuery('#brandResult').html(response.data);
+                    }
+
+                },
+                error: function(response){
+                    console.log(response);
+                }
+
+            });
+
+        });*/
+
+    });
+
+</script>

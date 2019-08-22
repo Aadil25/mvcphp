@@ -1,0 +1,93 @@
+<form name = "insert" action = "index.php?controller=product_index&action=save" method = "post" >
+<?php $product = Ccc::getModel("product") ?>
+<?php $request = Ccc::getModel('request') ?>
+<?php if($request->getParam('editId')): ?>
+    <?php $product->load($request->getParam('editId')) ?>
+<?php endif; ?>
+<?php $database = Ccc::getModel('database');
+        $result = $database->fetchAll("select category_id, category_name from category");
+?>
+            <table  border = "1">                                           
+                <input type = "hidden" name = "product_id" value = "<?php echo $product->product_id; ?>"/>
+                <th colspan = "2">
+                    <h1>Product</h1>
+                </th>
+                <tr>
+                    <td>
+                        <b>Product Name :</b>
+                    </td>
+                    <td>
+                        <input type = "text" name = "name" value = "<?php echo $product->name; ?>"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>sku :</b>
+                    </td>
+                    <td>
+                        <input type = "text" name = "sku" value = "<?php echo $product->sku; ?>"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>price :</b>
+                    </td>
+                    <td>
+                        <input type = "text" name = "price" value = "<?php echo $product->price; ?>" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>quantity :</b>
+                    </td>
+                    <td>
+                        <input type = "text" name = "quantity" value = "<?php echo $product->quantity; ?>"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>Status :</b>
+                    </td>
+                    <td>
+                        <?php $yes = $no = '' ?>
+                        <?php if($product->is_enabled == 1):?>
+                           <?php $yes = "selected" ?>
+                        <?php elseif($product->is_enabled == 2): ?>
+                            <?php $no = "selected" ?>    
+                        <?php endif ?>
+                    
+                        <label>
+                            <select name = "is_enabled">
+                                <option value = "1" <?php echo $yes; ?> >Yes</option>
+                                <option value = "2" <?php echo $no;?> >No</option>
+                            </select>
+                        </label>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        <b>Category_Id :</b>
+                    </td>
+                    <td>
+                        <label>
+                            <select name = "category">
+                                <?php foreach($result as $value):?>
+                                    <option value = "<?php echo $value['category_id']?>" ><?php echo $value['category_name']; ?></option>         
+                                <?php endforeach; ?>
+                            </select>
+                        </label>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td align = "right">
+                        <input type = "submit" value = "submit" name = "submit" />
+                    </td>
+                    <td>
+                        &nbsp;
+                    </td>
+                </tr>
+            </table>
+</form>
+

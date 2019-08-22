@@ -1,0 +1,33 @@
+<?php $request = Ccc::getModel('request');
+    $params = $request->getParams();
+    
+    $controller = "";
+    $heading = "";
+    if(empty($params)){
+        $heading = "Customer/Vehicle Information";
+        $controller = "bill_part";
+        $form = 'customer-form';
+    }
+    else if($request->getParam('controller') == "bill_part"){
+        $heading = "Parts Details";
+        $controller = "service_index";
+        $form = 'bill_part_form';
+    }
+    else if($request->getParam('controller') == "service_index"){
+        $heading = "Service Details";
+        $controller = "bill_details";
+        $form = 'bill_service_form';
+    }
+    else if($request->getParam('controller') == "bill_details"){
+        $heading = "Bill Details";
+        $controller = "bill_view";
+        $form = 'bill_details_form';
+    }
+?>
+<div class="veh-header">
+    <h2><?php echo $heading?></h2>
+    
+        <button class="submit-btn" type="submit" form="<?php echo $form?>">Next</button>
+
+    
+</div>

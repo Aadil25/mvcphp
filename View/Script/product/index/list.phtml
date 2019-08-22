@@ -1,0 +1,236 @@
+<?php $database = Ccc::getModel('database') ?>
+<?php $product = Ccc::getModel("product") ?>
+<?php 
+    $row = $database->fetchAll("SELECT * 
+                                    FROM  `product` p
+                                    LEFT JOIN  `category` c ON p.category_id = c.category_id");
+?>
+<div id="grid-list"><input name="selectedIds" id="selectedIds" value="" type="hidden">
+    <div>
+        <div>
+            <table class="actions" cellspacing="0" >
+                <tbody>
+                    <tr>
+                        <td class="pager">
+                            <div class="pager">
+                                <table align="left">
+                                    <tbody>
+                                        <tr>
+                                            <td><span>Per Page:&nbsp;</span>
+                                                <select name="perpage" id="perpage" class="input-select" style="width:50px" onchange="object.setFormURL(this.value).loadPage();">
+                                                    <option value="/admin/customer_airline_account/grid/perpage/10" label="10">10</option>
+                                                    <option value="/admin/customer_airline_account/grid/perpage/20" label="20" selected="selected">20</option>
+                                                    <option value="/admin/customer_airline_account/grid/perpage/30" label="30">30</option>
+                                                    <option value="/admin/customer_airline_account/grid/perpage/50" label="50">50</option>
+                                                    <option value="/admin/customer_airline_account/grid/perpage/100" label="100">100</option>
+                                                    <option value="/admin/customer_airline_account/grid/perpage/200" label="200">200</option>
+                                                </select>        
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+        </div>  
+                            <input name="totalItemCount" id="totalItemCount" value="14" type="hidden">                                            
+                        </td>
+                        <td class="export" >
+                            <input id="exportFileName" name="exportFileName" value="" type="hidden">
+                            <span>Export To:&nbsp;</span>
+                            <span>
+                                <select name="user_export" id="user_export" class="input-select">
+                                    <option selected="selected" value="csv" label="CSV">CSV</option>
+                                    <option value="xls" label="XLS">XLS</option>
+                                </select>
+                            </span>
+                            <span><button name="export" id="export" type="button" value="Export" class="input-button" onclick="object.setFormURL('/admin/customer_airline_account/export').setMessage('Please select item which you want to export.').exportGrid();">Export</button></span>
+                                
+                        </td>
+                        <td class="filter-actions a-right">
+                            <button style = "margin-left: 190px;" id="" title="Reset Filter" type="button" class="scalable " onclick="object.setFormURL('/admin/customer_airline_account/reset/page/1').loadPage();">
+                                <span><span><span>Reset Filter</span></span></span>
+                            </button>
+                            <button title="Search" type="submit" class="scalable" style="" onclick="object.setFormURL('/admin/customer_airline_account/grid').loadPage(); return false;">
+                                <span><span><span>Search</span></span></span>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        
+        <div id="periodGrid_massaction">
+            <table class="massaction" cellpadding="0" cellspacing="0" >
+                <tbody>
+                    <tr>
+                        <td>
+                            <a href="javascript:void(0);" onclick="object.selectAll()">Select All</a>
+                            <span class="separator">|</span>
+                            <a href="javascript:void(0);" onclick="object.unselectAll()">Unselect All</a>
+                            <span class="separator">|</span>
+                            <a href="javascript:void(0);" onclick="object.selectVisible()">Select Visible</a>
+                            <span class="separator">|</span>
+                            <a href="javascript:void(0);" onclick="object.unselectVisible()">Unselect Visible</a>
+                            <span class="separator">|</span>
+                            <span id="row-count">0/0</span>items selected
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="grid">
+            <div class="hor-scroll">
+                <table class="data" id="periodGrid_table" cellspacing="0" border="1">
+                    <colgroup>
+                        <col class="a-center" width="50">
+                        <col width="110">
+                        <col width="100">
+                        <col>
+                        <col width="100">
+                        <col width="150">
+                        <col width="150">
+
+                        
+                        
+                    </colgroup>
+                    <thead>
+                        <tr class="headings">
+                            <th class="no-link">
+                                <span class="nobr">&nbsp;</span>
+                            </th>
+                            <th class="a-center">
+                                <span class="nobr"><a href="javascript:void(0)" class="sort-arrow-desc" onclick="object.setFormURL('').loadPage(); return false;"><span class="sort-title">ID</span></a></span>
+                            </th>
+                            <th class="no-link">
+                                <span class="nobr"><a href="javascript:void(0)" class="not-sort" onclick="object.setFormURL('').loadPage(); return false;"><span class="sort-title">Product_name</span></a></span>
+                            </th>
+                            <th class="no-link">
+                                <span class="nobr"><a href="javascript:void(0)" class="not-sort" onclick="object.setFormURL('').loadPage(); return false;"><span class="sort-title">SKU</span></a></span>
+                            </th>
+                            <th class="no-link">
+                                <span class="nobr"><a href="javascript:void(0)" class="not-sort" onclick="object.setFormURL('').loadPage(); return false;"><span class="sort-title">Price</span></a></span>
+                            </th>
+                            <th class="no-link">
+                                <span class="nobr"><a href="javascript:void(0)" class="not-sort" onclick="object.setFormURL('').loadPage(); return false;"><span class="sort-title">Quantity</span></a></span>
+                            </th>
+                            <th class="no-link">
+                                <span class="nobr"><a href="javascript:void(0)" class="not-sort" onclick="object.setFormURL('').loadPage(); return false;"><span class="sort-title">Is_Enabled</span></a></span>
+                            </th>
+                            <th class="no-link">
+                                <span class="nobr"><a href="javascript:void(0)" class="not-sort" onclick="object.setFormURL('').loadPage(); return false;"><span class="sort-title">Category_Name</span></a></span>
+                            </th>
+                            <th class="no-link">
+                                <span class="nobr"><a href="javascript:void(0)" class="not-sort" onclick="object.setFormURL('').loadPage(); return false;"><span class="sort-title">Created_date</span></a></span>
+                            </th>
+                            <th class="a-center">
+                                <span class="nobr"><a href="javascript:void(0)" class="not-sort" onclick="object.setFormURL('').loadPage(); return false;"><span class="sort-title">Updated_date</span></a></span>
+                            </th>
+                            <th class="a-center last" colspan="3">
+                                <span class="nobr">Action</span>
+                            </th>
+                        </tr>
+                        <tr class="filter">
+                            <th></th>
+                            <th>
+                                <div class="field-100">
+                                    <table cellpadding="0" cellspacing="0" width="160">
+                                        <tbody><tr>
+                                            <td valign="top">From:</td>
+                                            <td><input name="customer_airline_account_id_from" id="customer_airline_account_id_from" class="input-text" maxlength="11" type="text"></td>
+                                        </tr>
+                                        <tr>
+                                            <td valign="top">To:</td>
+                                            <td><input name="customer_airline_account_id_to" id="customer_airline_account_id_to" class="input-text" maxlength="11" type="text"></td>
+                                        </tr>
+                                    </tbody></table>
+                                </div>                                
+                            </th>
+                            <th>
+                                <div class="field-100">
+                                    <input name="category" id="category" class="input-text" maxlength="50" type="text">                            
+                                </div>
+                            </th>
+                            <th>
+                                <div class="field-100">
+                                    <input name="prod_name" id="prod_name" class="input-text" maxlength="50" type="text">                                
+                                </div>
+                            </th>
+                            <th>
+                                <div class="field-100">
+                                    <input name="prod_sku" id="prod_sku" class="input-text" maxlength="50" type="text">                                
+                                </div>
+                            </th>
+                            <th>
+                                <div class="field-100">
+                                    <input name="prod_price" id="prod_price" class="input-text" maxlength="50" type="text">                                
+                                </div>
+                            </th>
+                            <th>
+                                <div class="field-100">
+                                    <input name="prod_quantity" id="prod_quantity" class="input-text" maxlength="50" type="text">                                
+                                </div>
+                            </th>
+                            
+							
+                            <th>
+                                <div class="field-100">
+                                    <select name="status" id="status" class="input-select">
+                                        <option selected="selected" value="0" label=""></option>
+                                        <option value="1" label="Yes">Yes</option>
+                                        <option value="2" label="No">No</option>
+                                    </select>                                
+                                </div>
+                            </th>
+                            
+                            <th>
+                                <div class="field-100">
+                                    <input name="category_name" id="category_name" class="input-text" maxlength="50" type="text">                                
+                                </div>
+                            </th>
+                            
+                            
+                            <th>
+                                <div class="field-100">
+                                    <table cellpadding="0" cellspacing="0" width="160">
+                                        <tbody><tr>
+                                            <td valign="top">From:</td>
+                                            <td><input name="updated_date_from" id="updated_from_date" class="w2em format-y-m-d divider-dash input-text hasDatepicker" readonly="readonly" style="width: 90px; align:center; vertical-align: middle;" type="text"></td>
+                                        </tr>
+                                        <tr>
+                                            <td valign="top">To:</td>
+                                            <td><input name="updated_date_to" id="updated_to_date" class="w2em format-y-m-d divider-dash input-text hasDatepicker" readonly="readonly" style="width: 90px; align:center; vertical-align: middle;" type="text"></td>
+                                        </tr>
+                                    </tbody></table>
+                                </div>
+                            </th>
+                            <th colspan="3">
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach($row as $records): ?>
+                            <tr class="even pointer">
+                                <td class="a-center ">           
+                                    <input name="check_single[]"  class="check_single input-checkbox" onclick="object.checkSingle(this)" type="checkbox">
+                                </td>
+                                <td align="center"> <?php echo $records['product_id'] ?> </td>
+                                <td align="left"> <?php echo $records['name'] ?>  </td>
+                                <td align="left"> <?php echo $records['sku'] ?>  </td>
+                                <td align="left"> <?php echo $records['price'] ?>  </td>
+                                <td align="left"> <?php echo $records['quantity'] ?>  </td>
+                                <td align="left"> <?php echo ($records['is_enabled'] == Model_Product::STATUS_YES?'Yes':'No') ?> </td> 
+                                <td align="left"> <?php echo $records['category_name'] ?> </td> 
+                                <td align="left"> <?php echo $records['created_date'] ?> </td>
+                                <td align="left"> <?php echo $records['updated_date'] ?>  </td>
+                                <td align="left"><a href="index.php?controller=product_index&action=delete&deleteId=<?php echo $records['product_id']; ?> " class="Link" title="Delete"><img src="images/delete-icon.png" alt="delete"></a></td> 
+                                <td align="left"><a href="index.php?controller=product_index&action=edit&editId=<?php echo $records['product_id']; ?> " class="Link" title="Edit"><img src="images/edit-2.png"></a></td> 
+                                <td align="left"><a href="index.php?controller=product_index&action=updateStatus&statusId=<?php echo $records['product_id']; ?>&status=<?php echo $records['is_enabled']; ?> " class="Link" title="Status"><?php echo ($records['is_enabled'] == Model_Product::STATUS_YES?'Enable':'Disable'); ?></a></td> 
+                            </tr>
+                        <?php endforeach; ?>
+   
+                    </tbody>
+                </table>            
+            </div>
+       </div>
+    </div>
+</div>
+</div>
+

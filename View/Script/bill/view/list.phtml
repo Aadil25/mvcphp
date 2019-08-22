@@ -1,0 +1,153 @@
+<?php 
+    $allData = $this->getAllData();
+    
+    $customerData = $allData['customerData']['customer'];
+    $vehicalInfo = $allData['customerData']['vehical'];
+    $partData = $allData['partData']['part'];
+    $serviceData = $allData['serviceData']['service'];
+?>
+<table cellpadding="0" cellspacing="0" width="100%" style="padding: 20px 65px 30px 65px;">
+    <tr>
+      <td align="center" valign="top">
+        <table cellspacing="0" cellpadding="0" width="100%">
+          <tr>
+            <td>
+              <table cellpadding="0" cellspacing="0" width="100%">
+                <tr>
+                  <td align="left" valign="middle">
+                    <a href="#"><img src="assets/images/header-logo.png" alt=""></a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td align="left" valign="top" style="padding-top: 20px; padding-bottom: 10px;">
+              <table cellpadding="0" cellspacing="0">
+                <tr>
+                  <td align="left" valign="top" style="font-size:20px; color: #333333; font-family: Arial, Helvetica, sans-serif;">Date:</td>
+                  <td align="left" valign="top" style="font-size:20px; color: #666666; font-family: Arial, Helvetica, sans-serif;"><?php echo date("d M Y");?></td>
+                  <td id="printRow" align="right" valign="top" style="width: 87%; font-size: 18px; color: #727272; font-family: Arial, Helvetica, sans-serif;">
+                  	<div class="veh-header">
+		                <a id="print" href="#" type="button" onclick="window.print();">Print</a>
+		            </div>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td align="left" valign="top" style="padding-bottom: 20px;">
+              <table cellpadding="0" cellspacing="0" width="100%">
+                <tr>
+                  <td align="left" valign="top" style="font-size: 18px; color: #727272; font-family: Arial, Helvetica, sans-serif; background: #bfdff4; padding: 8px 0 8px 10px;" width="50%">CUSTOMER</td>
+                  <td align="left" valign="top" style="font-size: 18px; color: #727272; font-family: Arial, Helvetica, sans-serif; background: #bfdff4; padding: 8px 0 8px 0px;">VEHICLE</td>
+                  <td align="right" valign="top" style="font-size: 18px; color: #727272; font-family: Arial, Helvetica, sans-serif; background: #bfdff4; padding: 8px 10px 8px 0px;">ADDITIONAL INFO</td>
+                </tr>
+                <tr>
+                  <td align="left" valign="top" style="font-size: 16px; color: #727272; font-family: Arial, Helvetica, sans-serif; padding: 8px 0 8px 10px;" width="50%"><?php echo $customerData['customer_name'];?></td>
+                  <td align="left" valign="top" style="font-size: 16px; color: #727272; font-family: Arial, Helvetica, sans-serif; padding: 8px 0 8px 0px;"><?php echo $customerData['vehical_number'];?></td>
+                  <td align="right" valign="top" style="font-size: 16px; color: #727272; font-family: Arial, Helvetica, sans-serif; padding: 8px 10px 8px 0px;"><?php echo $vehicalInfo['additional_info']?></td>
+                </tr>
+                <tr>
+                  <td align="left" valign="top" style="font-size: 16px; color: #727272; font-family: Arial, Helvetica, sans-serif; padding: 8px 0 8px 10px;" width="50%"><?php echo $customerData['mobile_number'];?></td>
+                  <td align="left" valign="top" style="font-size: 16px; color: #727272; font-family: Arial, Helvetica, sans-serif; padding: 8px 0 8px 0px;"><?php echo $vehicalInfo['brand_name']?></td>
+                  <td align="right" valign="top" style="font-size: 16px; color: #727272; font-family: Arial, Helvetica, sans-serif; padding: 8px 10px 8px 0px;"><?php echo $vehicalInfo['additional_info']?></td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td align="left" valign="top" style="padding-bottom: 14px; border-bottom: 2px solid #eef6fc;">
+              <table cellpadding="0" cellspacing="0" width="100%">
+                <tr>
+                  <td align="left" valign="top" style="font-size: 18px; color: #727272; font-family: Arial, Helvetica, sans-serif; background: #bfdff4; padding: 8px 0 8px 10px;" width="50%">PAERTS NAME</td>
+                  <td align="center" valign="top" style="font-size: 18px; color: #727272; font-family: Arial, Helvetica, sans-serif; background: #bfdff4; padding: 8px 0 8px 0px;">QTY</td>
+                  <td align="right" valign="top" style="font-size: 18px; color: #727272; font-family: Arial, Helvetica, sans-serif; background: #bfdff4; padding: 8px 0 8px 0px;">RATE</td>
+                  <td align="right" valign="top" style="font-size: 18px; color: #727272; font-family: Arial, Helvetica, sans-serif; background: #bfdff4; padding: 8px 10px 8px 0px;">AMOUNT</td>
+                </tr>
+                <?php $totalPartAmount = 0;?>
+                <?php foreach($partData as $key=>$value):
+                    $totalPartAmount += $value['amount'];
+                ?>
+                    <tr>
+                        <td align="left" valign="top" style="font-size: 16px; color: #727272; font-family: Arial, Helvetica, sans-serif; padding: 8px 0 8px 10px;" width="50%"><?php echo $value['part_name']?></td>
+                        <td align="center" valign="top" style="font-size: 16px; color: #727272; font-family: Arial, Helvetica, sans-serif; padding: 8px 0 8px 0px;"><?php echo $value['qty']?></td>
+                        <td align="right" valign="top" style="font-size: 16px; color: #727272; font-family: Arial, Helvetica, sans-serif; padding: 8px 0 8px 0px;"><?php echo $value['rate']?></td>
+                        <td align="right" valign="top" style="font-size: 16px; color: #727272; font-family: Arial, Helvetica, sans-serif; padding: 8px 10px 8px 0px;"><?php echo $value['amount']?></td>
+                    </tr>
+                <?php endforeach?>
+                <tr>
+                  <td align="left" valign="top" style="padding-top: 8px; padding-bottom: 10px; font-size: 22px; color: #000000; font-family: Arial, Helvetica, sans-serif; padding: 20px 0 30px 10px;" colspan="2">Total:</td>
+                  <td align="right"  colspan="2" valign="top" style="padding-top: 8px; padding-bottom: 10px; font-size: 22px; color: #000000; font-family: Arial, Helvetica, sans-serif; padding: 20px 10px 30px 0px;"><?php echo $totalPartAmount;?></td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td align="left" valign="top" style="padding: 0px 0px 30px 0px;">
+              <table cellpadding="0" cellspacing="0" width="100%">
+                
+                <tr>
+                  <td align="left" valign="top" style="padding-top: 8px; padding-bottom: 10px; font-size: 18px; color: #727272; font-family: Arial, Helvetica, sans-serif; background:#bfdff4; padding: 8px 0 8px 10px;">PAERTS NAME</td>
+                  <td align="right" valign="top" style="padding-top: 8px; padding-bottom: 10px; font-size: 18px; color: #727272; font-family: Arial, Helvetica, sans-serif; background:#bfdff4; padding:8px 10px 8px 0px;">AMOUNT</td>
+                </tr>
+                <?php $totalServiceAmount = 0;?>
+                <?php foreach($serviceData as $key=>$value):
+                    $totalServiceAmount += $value['amount'];
+                ?>
+                    <tr>
+                        <td align="left" valign="top" style="padding-top: 8px; padding-bottom: 10px; font-size: 16px; color: #727272; font-family: Arial, Helvetica, sans-serif; padding: 8px 0 8px 10px;"><?php echo $value['service_name']?></td>
+                        <td align="right" valign="top" style="padding-top: 8px; padding-bottom: 10px; font-size: 16px; color: #727272; font-family: Arial, Helvetica, sans-serif; padding:8px 10px 8px 0px;"><?php echo $value['amount']?></td>
+                    </tr>
+                <?php endforeach;?>
+                <tr>
+                  <td align="left" valign="top" style="font-size: 22px; color: #000000; font-family: Arial, Helvetica, sans-serif; padding: 20px 0 30px 10px;">Total:</td>
+                  <td align="right" valign="top" style="font-size: 22px; color: #000000; font-family: Arial, Helvetica, sans-serif; padding: 20px 10px 30px 0px;"><?php echo $totalServiceAmount?></td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <table cellpadding="0" cellspacing="0" width="100%">
+                <tr>
+                  <td align="left" valign="top" colspan="2" style="padding-top: 8px; padding-bottom: 10px; font-size: 18px; color: #727272; font-family: Arial, Helvetica, sans-serif; background:#bfdff4; padding: 8px 0 8px 10px;">SUMMERY</td>
+                </tr>
+                
+                <tr>
+                  <td align="right" valign="top" style="font-size: 22px; color: #333333; font-family: Arial, Helvetica, sans-serif; padding: 30px 0px 30px 0px; border-bottom: 2px solid #eef6fc;">Grand Total:</td>
+                  <td align="right" valign="top" style="font-size: 22px;font-weight: bold; color: #333333; font-family: Arial, Helvetica, sans-serif; padding: 30px 10px 30px 0px; border-bottom: 2px solid #eef6fc;"><?php echo $totalAmount = $totalPartAmount + $totalServiceAmount?></td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <table cellpadding="0" cellspacing="0" width="100%">
+                <tr>
+                  <td align="left" valign="top" colspan="2" style="padding-top: 8px; padding-bottom: 10px; font-size: 18px; color: #727272; font-family: Arial, Helvetica, sans-serif;  padding: 8px 0 8px 10px;">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td align="right" valign="top" style="padding: 30px 0px 30px 0px;">&nbsp;</td>
+                  <td align="right" valign="top" style="padding: 30px 10px 30px 0px;">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td align="right" valign="top" style="padding: 30px 0px 30px 0px;">&nbsp;</td>
+                  <td align="right" valign="top" style="font-size: 22px; color: #333333; font-family: Arial, Helvetica, sans-serif; padding: 30px 10px 30px 0px;">Signature</td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+ <script type="text/javascript">
+ 	jQuery(document).ready(function(){
+ 		jQuery("td#printRow").show();
+ 		jQuery("#print").click(function(){
+ 			jQuery("td#printRow").hide();
+ 		});
+ 	});
+ </script>

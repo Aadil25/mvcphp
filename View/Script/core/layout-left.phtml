@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<?php echo $this->getHeadHtml(); ?>
+
+<body>
+<div class="wrapper" id="section">
+    <div id="header_panel">
+        <?php echo $this->getHeaderHtml();?>
+    </div>
+    <div class="main two-column-left" style="width: 100%;">
+        <div class="container" style="width: 100%;">
+            <div class="middle" id="anchor-content" style="width: 100%;">
+            
+                <div id="left_panel" style="width: 35%; height: 600px; border: 1px solid #FFFFFF; float: left; overflow: auto;">
+                    <?php echo $this->getLeftHtml(); ?>
+                </div>
+                
+                <div id="main-container" style="width: 40%; height: 600px; border: 1px solid #FFFFFF; float: left; overflow: auto;">
+                    <?php echo $this->getContentHtml(); ?>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="clear : both;"></div>
+    <div style="width: 100%;"><?php echo $this->getFooterHtml();  ?></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,12 @@
+<footer class="footer">
+    <div class="container-fluid">
+    	<?php if($this->getBlockCount()):?>
+	        <?php foreach($this->getBlocks() as $block): ?>
+	            <?php echo $block->toHtml(); ?>
+	        <?php endforeach; ?>
+	    <?php endif; ?>
+        <div class="copyright pull-right">
+            &copy; <script>document.write(new Date().getFullYear())</script>, made with <i class="ti-heart"></i> by <a href="mailto:adilkadiyawala@gmail.com">Adil Kadiyawala</a>
+        </div>
+    </div>
+</footer>

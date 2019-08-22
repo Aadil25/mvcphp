@@ -1,0 +1,41 @@
+<form name = "insert" action = "index.php?controller=bill_part&action=saveinsession" method = "post" id="bill_part_form">
+<?php $database = Ccc::getModel('database') ?>
+<?php $customer = Ccc::getModel("customer") ?>
+<?php $row = $database->fetchAll("select * from customer") ?>
+<div class="veh-deta-table">
+    <div class="veh-deta-main">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th align = "left">Parts name</th>
+                    <th align = "center">Quantity</th>
+                    <th align="right" width="100" >Rate</th>
+                    <th align="right" width="200">Amount</th>
+                    <th>&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div> 
+</div>
+</form>
+<script type="text/javascript">
+    jQuery(document).ready(function(){
+        var i = 1;
+        jQuery("#addRow").click(function(){
+            var partName = $("#part_name").val();
+            var qty = $("#qty").val();
+            var rate = $("#rate").val();
+            var amount = parseInt(qty) * parseInt(rate);
+            
+            var markup = "<tr><td>"+partName+"<input type=text name=part["+i+"][part_name] value="+partName+" hidden></td><td align = center>"+qty+"<input type=text name=part["+i+"][qty] value="+qty+" hidden></td><td align=right >"+rate+"<input type=text name=part["+i+"][rate] value="+rate+" hidden></td><td align=right >"+amount+"<input type=text name=part["+i+"][amount] value="+amount+" hidden></td><td><button class=remove><i class='fa fa-trash' aria-hidden=true></i></button></td></tr>";
+            $("table tbody").append(markup);
+            i++;
+        });
+    });   
+    jQuery(document).delegate('button.remove', 'click', function(e) {
+        e.preventDefault();   
+        jQuery(this).parents("tr").remove();
+    });
+</script>

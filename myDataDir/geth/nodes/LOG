@@ -1,0 +1,18 @@
+=============== Aug 5, 2019 (IST) ===============
+12:31:32.855119 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+12:31:32.860771 db@open opening
+12:31:32.861717 version@stat F·[] S·0B[] Sc·[]
+12:31:32.869309 db@janitor F·2 G·0
+12:31:32.869360 db@open done T·8.542529ms
+14:00:32.884929 memdb@flush N·45536 S·3MiB
+14:00:32.920160 memdb@flush created L0@3 N·45536 S·713KiB "loc..seq,v24":"version,v1"
+14:00:32.920209 version@stat F·[1] S·713KiB[713KiB] Sc·[0.25]
+14:00:32.925911 memdb@flush committed F·1 T·40.564285ms
+14:00:32.927039 journal@remove removed @1
+15:06:32.883133 memdb@flush N·45139 S·3MiB
+15:06:32.917548 memdb@flush created L0@5 N·45139 S·640KiB "n:\x00..ing,v61988":"n:\xff..ong,v47398"
+15:06:32.917621 version@stat F·[2] S·1MiB[1MiB] Sc·[0.50]
+15:06:32.924447 memdb@flush committed F·1 T·41.204671ms
+15:06:32.925519 journal@remove removed @2
+15:06:33.836298 db@close closing
+15:06:33.836467 db@close done T·167.069µs

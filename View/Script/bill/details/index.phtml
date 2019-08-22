@@ -1,0 +1,120 @@
+<form name = "insert" action = "index.php?controller=customer_index&action=save" method = "post" id="bill_details_form">
+<?php 
+    $allData = $this->getAllData();
+    
+    $customerData = $allData['customerData']['customer'];
+    $vehicalInfo = $allData['customerData']['vehical'];
+    $partData = $allData['partData']['part'];
+    $serviceData = $allData['serviceData']['service'];
+?>
+<div class="veh-deta-table">
+    <div class="veh-deta-main">
+        <h3>Personal Details</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th align = "left">Customer</th>
+                    <th align = "left">Vehicle</th>
+                    <th align = "right" width = "200">Additional Info</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><?php echo $customerData['customer_name'];?></td>
+                    <td><?php echo $customerData['vehical_number'];?></td>
+                    <td align = "right"><?php echo $vehicalInfo['additional_info']?></td>
+                </tr>
+                <tr>
+                    <td><?php echo $customerData['mobile_number'];?></td>
+                    <td><?php echo $vehicalInfo['brand_name']?></td>
+                    <td align = "right"><?php echo $vehicalInfo['additional_info']?></td>
+                </tr>
+            </tbody>
+        </table>
+    </div> 
+</div>
+<div class="veh-deta-table">
+    <div class="veh-deta-main">
+        <h3>Parts Details</h3>
+        <div class="edit-button"><button><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit</button></div>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th align = "left" >Parts name</th>
+                    <th align = "center">Quantity</th>
+                    <th align ="right" width = "200">Rate</th>
+                    <th align ="right" width = "200">Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php $totalPartAmount = 0;?>
+                <?php foreach($partData as $key=>$value):
+                    $totalPartAmount += $value['amount'];
+                ?>
+                    <tr>
+                        <td><?php echo $value['part_name']?></td>
+                        <td align = "center"><?php echo $value['qty']?></td>
+                        <td align ="right"><?php echo $value['rate']?></td>
+                        <td align ="right"><?php echo $value['amount']?></td>
+                    </tr>
+                <?php endforeach?>
+            </tbody>
+        </table>
+        <div class="total-amt">
+            <label>Total:</label>
+            <span><?php echo $totalPartAmount;?></span>
+        </div>
+    </div> 
+</div>                  
+<div class="veh-deta-table">
+    <div class="veh-deta-main">
+        <h3>Services Details</h3>
+        <div class="edit-button"><button><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit</button></div>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th align = "left" >Services</th>
+                    <th align = "right" width = "100">Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php $totalServiceAmount = 0;?>
+                <?php foreach($serviceData as $key=>$value):
+                    $totalServiceAmount += $value['amount'];
+                ?>
+                    <tr>
+                        <td><?php echo $value['service_name']?></td>
+                        <td align= "right"><?php echo $value['amount']?></td>
+                    </tr>
+                <?php endforeach;?>
+            </tbody>
+        </table>
+        <div class="total-amt">
+            <label>Total:</label>
+            <span><?php echo $totalServiceAmount?></span>
+        </div>
+    </div> 
+</div>
+<div class="veh-deta-table">
+    <div class="veh-deta-main">
+        <!-- <h3>Summery</h3>
+        <table class="table table-hover">
+            <tbody>
+                <tr>
+                    <td>Consumables</td>
+                    <td align= "right">400</td>
+                </tr>
+                <tr>
+                    <td>A/C air duct and vent</td>
+                    <td align= "right">1080</td>
+                </tr>
+            </tbody>
+        </table> -->
+        <div class="total-amt">
+            <label>Total:</label>
+            <span class="final"><?php echo $totalAmount = $totalPartAmount + $totalServiceAmount?></span>
+            <input type="hidden" name="total_amount" id="total_amount" value="<?php echo $totalAmount?>">
+        </div>
+    </div> 
+</div>
+</form>

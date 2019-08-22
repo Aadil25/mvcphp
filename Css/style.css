@@ -1,0 +1,23 @@
+@import url('reset.css');
+@import url('boxes_002.css');
+@import url('menu.css');
+@import url('loader.css');
+.grid tr.even.selected_row, .grid tr.odd.selected_row
+{
+    background-color: #FAEBE7 !important;
+}
+.grid tr.even.selected_succeed_row, .grid tr.odd.selected_succeed_row
+{
+    background-color: #E3EED9 !important;
+}
+
+.grid td.increase
+{
+	color:#006400;
+}
+
+.grid td.decrease
+{
+	color:#FF0000;
+}
+

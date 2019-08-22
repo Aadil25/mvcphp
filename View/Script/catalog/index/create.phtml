@@ -1,0 +1,50 @@
+<form name = "insert" action = "index.php?controller=category_index&action=save" method = "post" >
+<?php $category = Ccc::getModel("category") ?>
+<?php $request = Ccc::getModel('request') ?>
+<?php if($request->getParam('editId')): ?>
+    <?php $category->load($request->getParam('editId')) ?>
+<?php endif; ?>
+            <table  border = "1">                                           
+                <input type = "hidden" name = "category_id" value = "<?php echo $category->category_id; ?>"/>
+                <th colspan = "2">
+                    <h1>Category</h1>
+                </th>
+                <tr>
+                    <td>
+                        <b>Category Name :</b>
+                    </td>
+                    <td>
+                        <input type = "text" name = "category_name" value = "<?php echo $category->category_name; ?>"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>Status :</b>
+                    </td>
+                    <td>
+                        <?php $yes = $no = '' ?>
+                        <?php if($category->status == 1):?>
+                           <?php $yes = "selected" ?>
+                        <?php elseif($category->status == 2): ?>
+                            <?php $no = "selected" ?>    
+                        <?php endif ?>
+                    
+                        <label>
+                            <select name = "status">
+                                <option value = "1" <?php echo $yes; ?> >Yes</option>
+                                <option value = "2" <?php echo $no;?> >No</option>
+                            </select>
+                        </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td align = "right">
+                        <input type = "submit" value = "submit" name = "submit" />
+                    </td>
+                    <td>
+                        &nbsp;
+                    </td>
+                </tr>
+            </table>
+</form>
+
