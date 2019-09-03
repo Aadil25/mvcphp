@@ -1,2 +1,0 @@
-# mvcphp
-Core php MVC
