@@ -9,7 +9,6 @@ class Model_Abstract
     
     public function __construct()
     {
-        
     }
     
     public function __set($key, $value = null)
@@ -186,5 +185,6 @@ class Model_Abstract
         }
     }
 }
+
 Ccc::getModel('database');
 ?>

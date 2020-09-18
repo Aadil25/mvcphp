@@ -16,7 +16,6 @@ final class Ccc
     
     public static function getModel($model = NULL)
     {
-        
         if($model != NULL)
         {
             $modelArray = explode("/", $model);
@@ -122,6 +121,7 @@ final class Ccc
            /* error_reporting(E_ALL);
             ini_set("display_errors", 1); */
             require_once $fileName;
+
             if(!class_exists($className))
             {
                echo("class not exits");die;
@@ -132,6 +132,7 @@ final class Ccc
 
             return false;
         }
+
         return $className;
     }
 }    

@@ -15,7 +15,7 @@
               <table cellpadding="0" cellspacing="0" width="100%">
                 <tr>
                   <td align="left" valign="middle">
-                    <a href="#"><img src="assets/images/header-logo.png" alt=""></a>
+                    <a href="#"><img src="assets/img/header-logo.png" alt="" id="logo"></a>
                   </td>
                 </tr>
               </table>
@@ -27,11 +27,6 @@
                 <tr>
                   <td align="left" valign="top" style="font-size:20px; color: #333333; font-family: Arial, Helvetica, sans-serif;">Date:</td>
                   <td align="left" valign="top" style="font-size:20px; color: #666666; font-family: Arial, Helvetica, sans-serif;"><?php echo date("d M Y");?></td>
-                  <td id="printRow" align="right" valign="top" style="width: 87%; font-size: 18px; color: #727272; font-family: Arial, Helvetica, sans-serif;">
-                  	<div class="veh-header">
-		                <a id="print" href="#" type="button" onclick="window.print();">Print</a>
-		            </div>
-                  </td>
                 </tr>
               </table>
             </td>
@@ -145,9 +140,8 @@
   </table>
  <script type="text/javascript">
  	jQuery(document).ready(function(){
- 		jQuery("td#printRow").show();
- 		jQuery("#print").click(function(){
- 			jQuery("td#printRow").hide();
+ 		jQuery("#logo").click(function(){
+ 			window.print();
  		});
  	});
  </script>

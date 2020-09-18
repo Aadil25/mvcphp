@@ -1,5 +1,5 @@
 <form id="grid-search-form" action="index.php?controller=history_index&action=index" method="post">  
-<?php $customer = $this->getCustomerData();?>
+<?php $customer = $this->getCollection(); ?>
     <div class="vehicle-details">
         <div class="row">
             <div class="col-md-4 col-sm-6 col-xs-12">
@@ -14,7 +14,7 @@
                 
                     <div class="form-group">
                         <label >Mobile Number</label>
-                        <input name="mobile_number" type="text" class="form-control" value="200" >
+                        <input name="mobile_number" type="text" class="form-control" value="" >
                     </div>
                 
             </div>
@@ -22,7 +22,7 @@
                     
                     <div class="form-group">
                         <label >Vehicle Number</label>
-                        <input name="vehicle_number" type="text" class="form-control" value="200" >
+                        <input name="vehicle_number" type="text" class="form-control" value="" >
                     </div>
                     
             </div>
@@ -44,7 +44,7 @@
                 <tbody>
                     <?php if(count($customer) > 0):?>
                         <?php foreach($customer as $_value):?>
-                            <tr>
+                            <tr class="clickable-row" data-href="<?php echo "index.php?controller=bill_view&action=index&id=".$_value['id']?>">
                                 <td><?php echo $_value["customer_name"];?></td>
                                 <td><?php echo $_value["mobile_number"];?></td>
                                 <td align = "center"><?php echo $_value["vehical_number"];?></td>
@@ -55,4 +55,17 @@
             </table>
         </div> 
     </div>
-</form>                  
+</form>
+<style type="text/css">
+    tr.clickable-row{
+        cursor: pointer;
+    }
+</style>
+
+<script type="text/javascript">
+    jQuery(document).ready(function($) {
+        jQuery(".clickable-row").on('click', function() {
+            window.location = jQuery(this).data("href");
+        });
+    });
+</script>     

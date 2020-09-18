@@ -171,19 +171,16 @@ class Controller_Customer_IndexController extends Controller_Abstract
             $partsValues = $allData['partData']['part'];
             $serviceValues = $allData['serviceData']['service'];
             
-           
             $postData = $this->getRequest()->getPost();
+            
             if($this->getRequest()->getSession()) 
             {   
-               
                 if($customerValues):
-                    if(!$customer->checkCustomerIsExists($customerValues))
-                    {
+                    if(!$customer->checkCustomerIsExists($customerValues)){
                         $customer->customer_name = $customerValues['customer_name'];
                         $customer->mobile_number = $customerValues['mobile_number'];
                         $customer->vehical_number = $customerValues['vehical_number'];
                         $customer->created_date = date('Y-m-d H:i:s');
-                        
                         $customer->insert();
                     }else{
                         $customer->id = $this->getRequest()->getParam('id');    
@@ -199,7 +196,7 @@ class Controller_Customer_IndexController extends Controller_Abstract
                         $customerVehicalMap->customer_id = $customer->id;
                         $customerVehicalMap->vehicle_id = $vehical->id;
                         $customerVehicalMap->insert();
-
+                        
                         $invoice->cust_id = $customer->id;
                         $invoice->total_amount = $postData['total_amount'];
                         $invoice->created_date = date('Y-m-d H:i:s');

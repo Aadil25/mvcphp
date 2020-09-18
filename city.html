@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+     <title>Introduction to Dapps. Simple MetaMask example.</title>
+  </head>
+  <body>
+ 
+  <div id="meta-mask-required"></div>
+  <fieldset>
+    <label> Ether:
+      <input type="text" id="amount"></input>
+    </label>
+    <button onclick="send()">Donate to the Author</button>
+    <div id="response"></div>
+  </fieldset>
+
+  <script>
+    // MetaMask injects the web3 library for us.
+    window.onload = function() {
+      if (typeof web3 === 'undefined') {
+        document.getElementById('meta-mask-required').innerHTML = 'You need <a href="https://metamask.io/">MetaMask</a> browser plugin to run this example'
+      }
+    }
+    function send() {
+      var currentAccount = 0;
+      ethereum.send('eth_accounts')
+        .then(handleAccountsChanged)
+        .catch(err => {
+          // In the future, maybe in 2020, this will return a 4100 error if
+          // the user has yet to connect
+          if (err.code === 4100) { // EIP 1193 unauthorized error
+            console.log('Please connect to MetaMask.')
+          } else {
+
+            console.error(err)
+          }
+      });
+
+      ethereum.on('accountsChanged', handleAccountsChanged);
+
+      function handleAccountsChanged (accounts) {
+        console.log(accounts)
+        if (accounts.length === 0) {
+          // MetaMask is locked or the user has not connected any accounts
+          console.log('Please connect to MetaMask...')
+
+        } else if (accounts[0] !== undefined) {
+          currentAccount = accounts[0]
+        // Run any other necessary logic...
+        } else if(accounts.result){
+          if(accounts.result.length === 0){
+            console.log('Please connect to MetaMask...')
+          }else{
+            currentAccount = accounts[0]  
+          }
+        }
+      }
+
+      console.log(currentAccount);
+      web3.eth.sendTransaction({
+        from: web3.eth.coinbase,
+        to: '0x10b382C92Bf4177B764b741F9442d8C93A8fbA76',
+        value: web3.toWei(document.getElementById("amount").value, 'ether')
+      }, function(error, result) {
+        if (!error) {
+          document.getElementById('response').innerHTML = 'Success: <a href="https://testnet.etherscan.io/tx/' + result + '"> View Transaction </a>'
+        } else {
+          document.getElementById('response').innerHTML = '<pre>' + error + '</pre>'
+        }
+      })
+    }
+  </script>
+  </body>
+</html>

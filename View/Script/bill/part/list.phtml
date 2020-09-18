@@ -29,8 +29,10 @@
             var rate = $("#rate").val();
             var amount = parseInt(qty) * parseInt(rate);
             
-            var markup = "<tr><td>"+partName+"<input type=text name=part["+i+"][part_name] value="+partName+" hidden></td><td align = center>"+qty+"<input type=text name=part["+i+"][qty] value="+qty+" hidden></td><td align=right >"+rate+"<input type=text name=part["+i+"][rate] value="+rate+" hidden></td><td align=right >"+amount+"<input type=text name=part["+i+"][amount] value="+amount+" hidden></td><td><button class=remove><i class='fa fa-trash' aria-hidden=true></i></button></td></tr>";
+            var markup = "<tr><td>"+partName+"<input type=text name=part["+i+"][part_name] value='"+partName+"' hidden></td><td align = center>"+qty+"<input type=text name=part["+i+"][qty] value="+qty+" hidden></td><td align=right >"+rate+"<input type=text name=part["+i+"][rate] value="+rate+" hidden></td><td align=right >"+amount+"<input type=text name=part["+i+"][amount] value="+amount+" hidden></td><td><button class=remove><i class='fa fa-trash' aria-hidden=true></i></button></td></tr>";
             $("table tbody").append(markup);
+            $("#part_name").val('');
+            $("#rate").val('');
             i++;
         });
     });   

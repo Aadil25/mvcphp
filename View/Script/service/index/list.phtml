@@ -24,9 +24,13 @@
             var serviceName = jQuery("#service_name").val();
             var amount = jQuery("#amount").val();
 
-            var markup = "<tr><td>"+serviceName+"<input type=text name=service["+i+"][service_name] value="+serviceName+" hidden></td><td align = right>"+amount+"<input type=text name=service["+i+"][amount] value="+amount+" hidden></td><td><button class=remove><i class='fa fa-trash' aria-hidden=true></i></button></td></tr>";
+            var markup = "<tr><td>"+serviceName+"<input type=text name=service["+i+"][service_name] value='"+serviceName+"' hidden></td><td align = right>"+amount+"<input type=text name=service["+i+"][amount] value="+amount+" hidden></td><td><button class=remove><i class='fa fa-trash' aria-hidden=true></i></button></td></tr>";
             
             $("table tbody").append(markup);
+
+            jQuery("#service_name").val('');
+            jQuery("#amount").val('');
+            
             i++;
         });
     });   

@@ -1,0 +1,14 @@
+
+<p class="ajax-result info">
+    The contents of this message were loaded via Ajax.
+    A piece of JavaScript also included in the Ajax responseText
+    will change the background color of this message in a few seconds.
+</p>
+<script type="text/javascript">
+    var timerId = setTimeout(function() {
+        $("#response-div")
+            .find("p")
+            .removeClass("info")
+            .addClass("success");
+    }, 7000);
+</script>

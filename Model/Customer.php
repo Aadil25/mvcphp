@@ -9,7 +9,7 @@ class Model_Customer extends Model_Abstract
     const STATUS_NO = "2";
 
     public function checkCustomerIsExists($customer){
-    	$query = "SELECT * FROM `{$this->getTableName()}` WHERE `{vehical_number}` = ".(int)$customer['vehical_number'];
+    	$query = "SELECT * FROM `{$this->getTableName()}` WHERE `{vehical_number}` = ".$customer['vehical_number'];
         $row = $this->getAdapter()->fetchRow($query);
         if(!$row)
         {
@@ -27,6 +27,30 @@ class Model_Customer extends Model_Abstract
             return null;
         }else{
             return $row;
+        }
+    }
+
+    public function fetchCustomerData($query){
+        //echo $query;die;
+        //$query = "SELECT * FROM `{$this->getTableName()}`";
+        $row = $this->fetchAll($query);
+        if(!$row)
+        {
+            return null;
+        }else{
+            return $row;
+        }
+    }
+
+    public function getCustomerById($id){
+        $query = "SELECT * FROM `{$this->getTableName()}` WHERE id = ".$id;
+       
+        $row = $this->getAdapter()->fetchRow($query);
+        if(!$row)
+        {
+            return null;
+        }else{
+            return true;
         }
     }
 }

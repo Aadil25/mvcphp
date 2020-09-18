@@ -12,8 +12,21 @@ class View_Block_Bill_View_List extends View_Block_Abstract
 
     public function getAllData(){
     	$requestModel = Ccc::getModel('request');
-    	$sessionData = $requestModel->getSession();
-    	return $sessionData;
+        $id = $requestModel->getParam('id');
+        
+        if(!$id){
+        	$sessionData = $requestModel->getSession();
+
+        	return $sessionData;
+        }
+        else{
+            $customerModel = Ccc::getModel('customer');
+            $customer = $customerModel->getCustomerById($id);
+            
+            return $customer;
+            //$customerBillInfo = $customerModel->
+        }
+
     }
 }
 ?>
